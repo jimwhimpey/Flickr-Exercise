@@ -49,18 +49,22 @@
 			$(".previous").click(function(){
 				// If we're not at the first photo, hide the current one and show the previous
 				if (current > 0) {
+					console.log(current);
 					current--;
+					console.log(current);
 					$("#lightbox li:visible").hide();
-					$("#lightbox li:nth-child(" + current + ")").show();
+					$("#lightbox li:eq(" + current + ")").show();
 				}
 				return false;
 			});
 			$(".next").click(function(){
 				// If we're not at the last photo, hide the current one and show the next
-				if (current < $("#lightbox li").length) {
+				if ((current + 1) < $("#lightbox li").length) {
+					console.log(current);
 					current++;
+					console.log(current);
 					$("#lightbox li:visible").hide();
-					$("#lightbox li:nth-child(" + current + ")").show();
+					$("#lightbox li:eq(" + current + ")").show();
 				}
 				return false;
 			});
