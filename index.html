@@ -21,8 +21,6 @@
 			// Make the call for the set
 			$.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=8242e922f3c5029f480fe8552f42b457&photoset_id=" + setID + "&per_page=10&page=1&format=json&nojsoncallback=1", function(photosetData){
 						
-				console.log(photosetData);
-						
 				// Loop through the returned photos making calls for image URLs
 				for (var i=0; i < photosetData.photoset.photo.length; i++) {
 					
