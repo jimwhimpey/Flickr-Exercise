@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+
+	<title>Flickr Set Light Box</title>
+	
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+	<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		
+		// Hold all the photos data
+		var photos = {};
+			
+		// Keep track of the current phot we're looking at
+		var current = 0;
+		
+		$(function(){
+			
+			// Pull the set ID out of URL, if there is one, otherwise use default
+			var setID = (window.location.search.search(/set=([0-9]+)/) >= 0) ? window.location.search.match(/set=([0-9]+)/)[1] : "72157604104311894";
+			
+			// Make the call for the set
+			$.getJSON("http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=39a716919e3983872672d8579d348f49&photoset_id=" + setID + "&per_page=10&page=1&format=json&nojsoncallback=1", function(photosetData){
+					
+				// Loop through the returned photos making calls for image URLs
+				for (var i=0; i < photosetData.photoset.photo.length; i++) {
+					
+					// Create a new property in the photos object for a new photo
+					photos[photosetData.photoset.photo[i].id] = {};
+					photos[photosetData.photoset.photo[i].id].title = photosetData.photoset.photo[i].title;
+					photos[photosetData.photoset.photo[i].id].owner = photosetData.photoset.ownername;
+					
+					// Make call to get photo size URLs
+					$.getJSON("http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=39a716919e3983872672d8579d348f49&photo_id=" + photosetData.photoset.photo[i].id + "&format=json&nojsoncallback=1", function(sizesData){
+						// Getting the photo ID out of the XHR URL, surely there's a better way to do this
+						var photoID = this.url.match(/photo_id=([0-9]+)/)[1];						
+						// Add the size we want (Medium 640) to our photos object
+						photos[photoID].image = sizesData.sizes.size[6].source
+						// Render this photo on the page
+						renderPhoto(photoID);
+					});
+					
+				};	
+				
+			});
+			
+			// Render a specific photo, takes the ID that'll match something in our photos object
+			function renderPhoto(photoID) {
+				$("#lightbox").append("<li><img src='" + photos[photoID].image + "' /> <h2>" + photos[photoID].title + " by " + photos[photoID].owner + "</h2></li>");
+			}
+			
+			// Event handlers for going next and previous
+			$(".previous").click(function(){
+				// If we're not at the first photo, hide the current one and show the previous
+				if (current > 0) {
+					current--;
+					$("#lightbox li:visible").hide();
+					$("#lightbox li:eq(" + current + ")").show();
+				}
+				return false;
+			});
+			$(".next").click(function(){
+				// If we're not at the last photo, hide the current one and show the next
+				if ((current + 1) < $("#lightbox li").length) {
+					current++;
+					$("#lightbox li:visible").hide();
+					$("#lightbox li:eq(" + current + ")").show();
+				}
+				return false;
+			});
+						
+		});
+		
+	</script>
+	
+</head>
+
+<body>
+
+	<div class="nav">
+		<a href="#" class="previous">&larr; Previous</a>
+		<a href="#" class="next"> Next&rarr;</a>
+	</div>
+	
+	<ol id="lightbox"></ol>
+	
+</body>
