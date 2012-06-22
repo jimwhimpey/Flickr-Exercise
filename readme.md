@@ -5,9 +5,9 @@ A very simple Flickr set lightbox made in a couple of hours.
 ### Some good sets
 
 * [Wildlife](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157624351524526)
-* [Poland](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157624351524526?set=72157628695323937)
-* [Classics in Lego](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157624351524526?set=72157602602191858)
-* [The Stelvio](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157624351524526?set=72157629970287070)
+* [Poland](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157628695323937)
+* [Classics in Lego](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157602602191858)
+* [The Stelvio](http://jimwhimpey.github.com/Flickr-Exercise/?set=72157629970287070)
 
 ### Limitations
 
