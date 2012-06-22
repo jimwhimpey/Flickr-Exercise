@@ -9,11 +9,12 @@ body {
     list-style: none; }
     body ol#lightbox li {
       display: none;
-      padding: 0;
-      margin: 0; }
+      padding: 0; }
       body ol#lightbox li h2 {
         font-size: 24px;
-        color: #666; }
+        color: #666;
+        width: 800px;
+        margin: 30px auto 0 auto; }
     body ol#lightbox li:first-child {
       display: block; }
   body .nav {
