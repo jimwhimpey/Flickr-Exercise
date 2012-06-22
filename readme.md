@@ -7,6 +7,6 @@ A very simple Flickr set lightbox made in a couple of hours.
 
 ### Problems
 
-* Photos not always output in order
-* No error checking of any kind
 * Only the latest 10 pics from a set
+* No error checking of any kind
+* Photos not always output in correct order depending on AJAX data return times
