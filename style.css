@@ -1,0 +1,4 @@
+ol#lightbox li {
+  display: none; }
+ol#lightbox li:first-child {
+  display: block; }
